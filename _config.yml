@@ -18,7 +18,7 @@ email: scheho@gmail.com
 description: > # this means to ignore newlines until "baseurl:"
   적으려니 어설프고, 안 적으려니 까먹겠고,
 baseurl: "/blog" # the subpath of your site, e.g. /blog
-url: "http://jehos.github.io" # the base hostname & protocol for your site
+url: "https://jehos.github.io" # the base hostname & protocol for your site
 twitter_username: gnutel
 github_username:  jehos
 
