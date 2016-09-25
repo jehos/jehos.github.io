@@ -4,22 +4,19 @@ title:  "Welcome to Jekyll!"
 date:   2016-09-25 19:35:28 +0900
 categories: jekyll update
 ---
-You’ll find this post in your `_posts` directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run `jekyll serve`, which launches a web server and auto-regenerates your site when a file is updated.
 
-To add new posts, simply add a file in the `_posts` directory that follows the convention `YYYY-MM-DD-name-of-post.ext` and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.
+블로그를 몇번이나 하려고 시도했지만 번번히 실패했다.
+생각을 남긴다는 행위의 중요성을 몰랐던 것도 아니었지만,
+글 하나 남기는데 들어가는 노력이 너무 버겁게 느껴졌던 것 같다.
 
-Jekyll also offers powerful support for code snippets:
+그나마 꼬박꼬박 했던것은, 짧은 글 조각으로 무책임하게 남기는 질문들과 기록들이었다.
+당장은 모르겠으나 다음에 해봐야지 했던 그 글조각들은 포스트잇에 옮겨져
+책상 옆 우드락 보드에 한장씩 붙여졌다.  
 
-{% highlight ruby %}
-def print_hi(name)
-  puts "Hi, #{name}"
-end
-print_hi('Tom')
-#=> prints 'Hi, Tom' to STDOUT.
-{% endhighlight %}
+시간이 흘러, 수백장의 포스트잇들은 나의 무지와 앎의 조각들이 되었다.
+지금은 얼마나 대답할 수 있나? 먼 나중에는 얼마나 대답할 수 있을까?
+그나마도 충실히 하지 않는 요즘에는 기억이 밀려 사라지는 느낌마저 받는다.
 
-Check out the [Jekyll docs][jekyll-docs] for more info on how to get the most out of Jekyll. File all bugs/feature requests at [Jekyll’s GitHub repo][jekyll-gh]. If you have questions, you can ask them on [Jekyll Talk][jekyll-talk].
+지금도 인터넷 어딘가엔 내가 몇번 쓰다만 블로그들이 잠겨있다.
 
-[jekyll-docs]: http://jekyllrb.com/docs/home
-[jekyll-gh]:   https://github.com/jekyll/jekyll
-[jekyll-talk]: https://talk.jekyllrb.com/
+이번엔 몇개나 쓰려나.
