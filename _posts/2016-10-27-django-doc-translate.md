@@ -9,7 +9,8 @@ categories: [web, translate]
 
 # 어디서 부터 시작하나?
 
-(지극히 개인적인 이유로) Django 에 기여하기로 마음먹고, 방법을 찾아보니
+[(지극히 개인적인 이유로)]({% post_url 2016-10-27-django-unchained %})
+Django 에 기여하기로 마음먹고, 방법을 찾아보니
 어디서부터 시작해야 할지 모를 정도로 복잡했다. 어딘가에 방법은 있었을텐데, 죄다
 영어라서 눈에 안보였던 것일지도 모른다. 가장 먼저 찾아본건 공식 문서의
 [contributing](https://docs.djangoproject.com/en/dev/internals/contributing/)
@@ -29,15 +30,13 @@ categories: [web, translate]
 
 메일링 리스트 가입은 번역시 발생하는 문제를 교류하기 위해서 이지만, 사실 글이
 활발하게 올라오는 것 같지는 않다. transifex 서비스를 활용하여 번역 작업을
-통합하는데, 각 언어마다 cordinator 가 존재하여 올라오는 번역들을 검수한다.
+통합하는데, 각 언어마다 coordinator 가 존재하여 올라오는 번역들을 검수한다.
 한국어 쪽의 번역은 약 2% 되어있는것으로 보아, outdated 된 자료이거나, 자동
-번역의 결과물일 가능성이 있다. cordinator 가 지정되어 있는지는 확실하지 않다.
+번역의 결과물일 가능성이 있다. coordinator 가 지정되어 있는지는 확실하지 않다.
 
 transifex 를 이용한 번역은 웹 에서 제공하는 번역 플랫폼을 이용하는 방법이고,
 gettext 같은 도구를 사용하여 내 컴퓨터에서 개발환경을 직접 구축해놓고 번역하는
-방법이 있다. 이를 [Specialties of Django
-translation](https://docs.djangoproject.com/en/1.10/topics/i18n/translation/#specialties-of-django-i18n)
-에서 언급하는데, 반드시 읽어보고 이를 연습해본다.
+방법이 있다. 
 
 # 이 글에서는 무엇을 할것인가?
 
@@ -67,10 +66,13 @@ transifex 라는 웹 기반의 번역 도구가 있는데 왜 굳이 내 컴퓨�
 이 문서는 관리되지 않아 곧 녹이 슬테니, 가능하면 공식 홈페이지의 내용을 따르는
 것이 좋다. 이곳의 내용은 개요(overview) 정도의 의미로만 생각해 주기 바란다.
 
-* [Writing your first patch for Django](https://docs.djangoproject.com/en/dev/intro/contributing/)
-* [Translation](https://docs.djangoproject.com/en/dev/topics/i18n/translation)
-* [Sphinx -
-  Internationalization](http://www.sphinx-doc.org/en/stable/intl.html)
+* **[Writing your first patch for Django](https://docs.djangoproject.com/en/dev/intro/contributing/)** -
+개발 환경 구성을 위한 튜토리얼이 포함되어 있음
+* **[Translation](https://docs.djangoproject.com/en/dev/topics/i18n/translation)** -
+Django 번역과 관련된 모든 내용이 들어있는 포탈
+* **[Sphinx -
+  Internationalization](http://www.sphinx-doc.org/en/stable/intl.html)** -
+Django 에서 문서화를 위해 사용되는 Sphinx 의 국제화 항목
 
 # 절차
 
@@ -100,7 +102,7 @@ transifex 라는 웹 기반의 번역 도구가 있는데 왜 굳이 내 컴퓨�
 낮다면 보장하는 패키지의 버전 범위가 다르기 때문에, 지나치게 오래된
 배포판이라면 수동으로 직접 컴파일 해서 설치해야 할 수도 있다. 다만 그 방법은 이
 장에서 설명하기에는 너무 복잡해지므로, 최대한 근래에 나온 배포판을 위주로
-진행해주시기 바랍니다. Fedora Core 나 Mint, Debian “stretch”, SUSE, Arch,
+진행해주기 바란다. Fedora Core 나 Mint, Debian “stretch”, SUSE, Arch,
 Gentoo 등 훌륭한 배포판은 확실하게 패키지로 제공할 것이며, FreeBSD 같은 Unix
 에서도 잘 동작한다. 하고싶은 말은, **자신의 배포판 상황에 맞게 잘 해석해서
 들어주세요**
@@ -108,7 +110,8 @@ Gentoo 등 훌륭한 배포판은 확실하게 패키지로 제공할 것이며,
 # 패키지 설치
 
 Ubuntu 16.04+ 버전이라면 다음의 명령으로 대부분의 의존성을 만족시킬 수 있을
-것이다.
+것이다. 이 패키지들이 설치되면서 의존성을 만족시키기 위해 다른 패키지들도 
+함께 설치되기 때문이다.
 
     sudo apt-get install virtualenvwrapper python3-pip git gettext
 
@@ -126,12 +129,16 @@ Python 과 같은 스크립트 언어는 버전에 따라 민감하게 반응한
 수 있는데, 이런 상황을 방지하기 위해 **독립된 것처럼 가상화된 Python 실행환경** 이 필요하다.
 
 즉, **각 프로젝트마다 따로따로 가상화된 Python 실행 환경을 독립적으로 제공** 할
-수 있게 된다. 실행 환경을 같이 쓸 때에는 A 라는 프로젝트에서 설치한 공용
-라이브러리가, B 프로젝트에서는 말썽을 일으킬 수도 있지만, 실행 환경을 가상화
-하여 나눠놓는다면, A 프로젝트만의 실행환경과 B 프로젝트만의 실행환경을 따로
-구성할 수 있으므로 개발환경을 깨끗하게 유지할 수 있게 된다.
+수 있게 된다. 
 
-virtualenv 는 그러한 목적에서 태어났으며, virtualenvwrapper 는 한단계 추상화
+* 실행 환경을 같이 쓸 때에는 
+  * A 라는 프로젝트에서 설치한 공용 라이브러리가, 
+  * B 프로젝트에서는 말썽을 일으킬 수도 있지만,
+* 실행 환경을 가상화 하여 나눠놓는다면, 
+* A 프로젝트만의 실행환경과 B 프로젝트만의 실행환경을 따로 구성할 수 있으므로
+* 서로의 간섭 없이 개발환경을 깨끗하게 유지할 수 있게 된다.
+
+virtualenv 는 그러한 목적에서 태어났으며, **virtualenvwrapper** 는 한단계 추상화
 시킨 wrapper 스크립트이다. 너무나 간단해서 몇개의 명령어만으로도 충분히 사용할
 수 있다. `mkvirtualenv` 명령으로 Python 실행 환경을 생성할 수 있는데, 이때
 `-p $(which python3)` 옵션을 붙임으로써, 이 Python 실행환경에서는 Python3 가
@@ -298,9 +305,8 @@ Python 실행 환경이 활성화(activate) 되면 프롬프트 앞에 괄호 �
 
 일단 현 버전(django 1.10 기준) 으로 필요한 모듈은 다음과 같이 설치할 수 있다.
 
-    pip install sphinx-intl django
+    pip install sphinx-intl
 
-* **django**
 * **sphinx-intl**
 
 # django 소스 내려받기
@@ -318,7 +324,7 @@ django 의 최신 소스를 내려받는다. django 에 commit 할 권한이 없
     ├── extras
     ├── js_tests
     ├── scripts
-    └── tests	# 테스트 스위트
+    └── tests	# 테스트 스위트 모음
 
 여기서, `docs/` 디렉토리로 이동하여 `gettext` 로 각 locale 의 골격을 추출한다.
 해당 디렉토리 내에는 `Makefile` 스크립트가 있으므로, `make gettext` 명령으로 수행한다.
@@ -357,8 +363,7 @@ django 의 최신 소스를 내려받는다. django 에 commit 할 권한이 없
 [Sphinx - Internationalization](http://www.sphinx-doc.org/en/stable/intl.html)
 항목을 살펴보기를 권한다.
 
-    (django-devel) jehos@django-devel:~/src/django/docs$ sphinx-intl update -p
-    _build/locale -l ko
+    (django-devel) jehos@django-devel:~/src/django/docs$ sphinx-intl update -p _build/locale -l ko
     Create: locale/ko/LC_MESSAGES/internals.po
     Create: locale/ko/LC_MESSAGES/intro.po
     Create: locale/ko/LC_MESSAGES/howto.po
@@ -495,8 +500,7 @@ django 의 최신 소스를 내려받는다. django 에 commit 할 권한이 없
 
 1. `make gettext` 명령은 사실 `sphinx-build -b gettext` 를 호출한다.
 이때 생성된 `.pot` 파일은 `_build/locale` 디렉토리에 생성된다.
-2.`sphinx-intl update -p _build/locale -l ko` 명령을 통해 `.pot` 파일에서 `.po`
-파일을 뽑아낸다.
+2. `sphinx-intl update -p _build/locale -l ko` 명령을 통해 `.pot` 파일에서 `.po` 파일을 뽑아낸다.
 3. 이렇게 추출한 `.po` 파일을 번역자가 직접 작업한다.
 4. 번역이 완료되면 `make -e SPHINXOPTS="-D language='ko'" html` 명령을 통해
    원하는 포맷(이 경우엔 html) 로 빌드하여 확인한다.
@@ -504,7 +508,7 @@ django 의 최신 소스를 내려받는다. django 에 commit 할 권한이 없
    반영시킨다.
 
 `patch` 나 pull request 를 작성하여 바로 소스에 반영하는 방법도 물론 있겠지만,
-아마도 번역의 일관성을 위해 반드시 cordinator 를 거치게끔 하려고 transifex 를
+아마도 번역의 일관성을 위해 반드시 coordinator 를 거치게끔 하려고 transifex 를
 인터페이스로 삼는 것으로 보인다. 만약 이러한 번역 작업물이 사방팔방에서
 검증없이 날아들면, 공동의 작업은 금방 누더기가 되어 버릴것이다.
 
@@ -515,7 +519,7 @@ django 의 최신 소스를 내려받는다. django 에 commit 할 권한이 없
 # 일단 정리!
 
 이 글에서는 **Django 의 문서 번역을 위한 개발 환경 구축하기** 를 주제로 하였다.
-사실 *rst 문서 안깨지게 쓰기* 같은걸 추가로 더 써야 하는데, 여기까지 쓰는데만도
+사실 **rst 문서 안깨지게 쓰기** 같은걸 추가로 더 써야 하는데, 여기까지 쓰는데만도
 4시간이 훌쩍 넘어버려서 더이상 쓰는것도 힘들고, 보는 사람은 더 힘들 것 같아서
 이만 글을 줄인다. 사실 이 글도 지금 몇개의 단위로 쪼개야 할 것처럼 보이는데..
 
