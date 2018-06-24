@@ -1,6 +1,12 @@
 ---
 hide_body: false
 is_partial: false
-fields: []
+fields:
+- type: text
+  name: punchline
+  label: punchline
+- type: textarea
+  name: contents
+  label: contents
 pages:
 - _posts/.md
